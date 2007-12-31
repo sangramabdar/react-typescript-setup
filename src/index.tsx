@@ -7,6 +7,7 @@ import React, {
   useReducer,
   useRef,
   useContext,
+  FunctionComponent,
 } from "react";
 
 import "./index.css";
@@ -27,13 +28,11 @@ function reducer(state: any, action: any) {
   }
 }
 
-async function getData() {
-  return 1;
-}
-
 function App(props) {
   const ref = useRef(null);
+
   const [state, dispatch] = useReducer(reducer, initialValue);
+
   useEffect(() => {}, [state]);
 
   return (
@@ -52,6 +51,7 @@ function App(props) {
     </dataContext.Provider>
   );
 }
+
 ReactDOM.render(
   <App children={"click here"} />,
   document.getElementById("root")
