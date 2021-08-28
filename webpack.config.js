@@ -19,32 +19,34 @@ const config = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
-    rules: [{
-                test: /\.(ts|tsx|js|jsx)$/,
-                loader: "babel-loader",
-                exclude: /node_modules/,
-            },
+    rules: [
+      {
+        test: /\.(ts|tsx|js|jsx)$/,
+        loader: "babel-loader",
+        exclude: /node_modules/,
+      },
 
-            {
-                test: /\.(css|scss)$/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 1,
-                            modules: true,
-                        },
-                    },
-                ],
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
             },
+          },
         ],
+      },
+    ],
   },
 
   devServer: {
-    watchContentBase: true,
-    contentBase: path.resolve(__dirname, "dist"),
+    // watchContentBase: true,
+    // contentBase: path.resolve(__dirname, "dist"),
     open: true,
+    historyApiFallback: true,
   },
 
   devtool: "source-map",
