@@ -1,4 +1,3 @@
-const currentTask = process.env.npm_lifecycle_event;
 
 const path = require("path");
 
@@ -60,14 +59,5 @@ const config = {
   ],
 };
 
-if (currentTask == "build") {
-  config.module.rules[1].use[0] = MiniCssExtractPlugin.loader;
-
-  config.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: "index.css",
-    })
-  );
-}
 
 module.exports = config;
