@@ -1,5 +1,3 @@
-const currentTask = process.env.npm_lifecycle_event;
-
 const path = require("path");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -9,7 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
-  mode: "development",
+  mode: "production",
 
   entry: path.resolve(__dirname, "src", "index.tsx"),
   output: {
@@ -19,6 +17,7 @@ const config = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
+
   module: {
     rules: [
       {
@@ -30,7 +29,7 @@ const config = {
       {
         test: /\.(css|scss)$/,
         use: [
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -43,31 +42,15 @@ const config = {
     ],
   },
 
-  devServer: {
-    // watchContentBase: true,
-    // contentBase: path.resolve(__dirname, "dist"),
-    open: true,
-    historyApiFallback: true,
-  },
-
-  devtool: "source-map",
-
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public", "index.html"),
     }),
     new CleanWebpackPlugin(),
-  ],
-};
-
-if (currentTask == "build") {
-  config.module.rules[1].use[0] = MiniCssExtractPlugin.loader;
-
-  config.plugins.push(
     new MiniCssExtractPlugin({
       filename: "index.css",
-    })
-  );
-}
+    }),
+  ],
+};
 
 module.exports = config;
