@@ -5,7 +5,6 @@
     "main": "index.js",
     "scripts": {
         "start": "webpack serve",
-        "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css --watch",
         "build": "webpack --config ./webpack.prod.js "
     },
     "keywords": [],
