@@ -7,50 +7,49 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
-  mode: "production",
+    mode: "production",
 
-  entry: path.resolve(__dirname, "src", "index.tsx"),
-  output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
-  },
-  resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
-  },
+    entry: path.resolve(__dirname, "src", "index.tsx"),
+    output: {
+        path: path.resolve(__dirname, "build"),
+        filename: "bundle.js",
+    },
+    resolve: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx|js|jsx)$/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
-      },
-
-      {
-        test: /\.(css|scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: true,
+    module: {
+        rules: [{
+                test: /\.(ts|tsx|js|jsx)$/,
+                loader: "babel-loader",
+                exclude: /node_modules/,
             },
-          },
-        ],
-      },
-    ],
-  },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public", "index.html"),
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "index.css",
-    }),
-  ],
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "public", "index.html"),
+        }),
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "index.css",
+        }),
+    ],
 };
 
 module.exports = config;
